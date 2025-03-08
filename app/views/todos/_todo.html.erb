@@ -1,0 +1,31 @@
+<div id="<%= dom_id todo %>">
+  <div class="todo-card">
+    <div class="todo-card-top">
+      <p><%= todo.task %></p>
+
+      <% if todo.done %>
+        <%= button_to "✓", todo_path(todo), method: :patch, params: { todo: { done: false } }, class: "todo-card-button-done" %>
+      <% else %>
+        <%= button_to "✗", todo_path(todo), method: :patch, params: { todo: { done: true } }, class: "todo-card-button-undone" %>
+      <% end %>
+    </div>
+
+    <div class="todo-card-footer">
+      <p>
+        <% if todo.priority == "High" %>
+          🔴
+        <% elsif todo.priority == "Medium" %>
+          🟠
+        <% else %>
+          🟡
+        <% end %>
+      </p>
+
+      <div>
+        <%= button_to "📒", todo_path(todo), method: :get, class: "icon-button" %> 
+        <%= button_to "🖊️", edit_todo_path(todo), method: :get, class: "icon-button" %>
+        <%= button_to "🗑", todo_path(todo), method: :delete, class: "icon-button" %>
+      </div>
+    </div>
+  </div>
+</div>
